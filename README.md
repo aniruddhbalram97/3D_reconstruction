@@ -18,13 +18,18 @@ extremely time consuming. Tested for Desk_1 dataset
 
 config/config.py contains configurations which can be modified to test mesh reconstruction
 
-### Run:
+### Execute:
 Args:
 - scene_type: "desk_1", "background_1" etc,
 - data_type: "pointcloud", "RGBD", "registration"
 - recon_method: "poisson"
 
 ```
+# Install conda environment
+cd <project_directory>
+conda env create -f environment.yml
+conda activate 3d_reconstruction
+
 # To run the script, eg:
 python src/main.py --data_type "RGBD" --scene_type "desk_1" --recon_method "poisson"
 ```
