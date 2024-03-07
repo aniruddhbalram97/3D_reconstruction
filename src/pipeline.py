@@ -103,7 +103,7 @@ class MultiwayRegistration():
             
     def visualize_combined_pointclouds(self,pcds,pose_graph):
         for point_id in range(len(pcds)):
-            print(pose_graph.nodes[point_id].pose)
+            # print(pose_graph.nodes[point_id].pose)
             pcds[point_id].transform(pose_graph.nodes[point_id].pose)
         visualization.draw_geometries(pcds)
         return
@@ -111,7 +111,7 @@ class MultiwayRegistration():
     def merge_pointcloud(self, pcds, pose_graph):
         merged_pcd = geometry.PointCloud()
         for point_id in range(len(pcds)):
-            pcds[point_id].transform(pose_graph.nodes[point_id].pose)
+            # pcds[point_id].transform(pose_graph.nodes[point_id].pose)
             merged_pcd += pcds[point_id]
         return merged_pcd
     

@@ -80,7 +80,7 @@ class PointCloud(RGBD):
         return
     
     def visualize_pointcloud(self, pcd):
-        visualization.draw_geometries([[pcd]])
+        visualization.draw_geometries([pcd])
         return
     
     def visualize_inliers_outliers(self, ind, pcd):
