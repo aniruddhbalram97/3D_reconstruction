@@ -15,7 +15,7 @@ parser.add_argument("-r", '--recon_method')
 args = parser.parse_args()
 
 if __name__ == "__main__":
-    result_pcd = f'results/{args.data_type}_{args.scene_type}.ply'
+    result_pcd = f'results/{args.data_type}_{args.scene_type}.pcd'
     if(args.data_type == "direct"):
         params = dict()
         params["pcd_path"] = get_pcd_path(pointcloud_config["base_path"], 
@@ -35,7 +35,8 @@ if __name__ == "__main__":
         m = MultiwayRegistration(rgb_image_paths, pointcloud_config["voxel_size"])
         pose_graph, pcds = m.optimize_posegraph(image_set = args.scene_type)
         m.visualize_combined_pointclouds(pcds, pose_graph)
-        pcd = m.merge_pointcloud(pcds)
+        pcd = m.merge_pointcloud(pcds, pose_graph)
+        print(pcd)
         m.write_pointcloud(pcd, result_pcd)
     
     else:
@@ -47,17 +48,18 @@ if __name__ == "__main__":
         pcds = c.combine_pointclouds()
         c.visualize(pcds)
         pcd = c.merge_pointcloud(pcds)
+        print(pcd)
         c.write_pointcloud(pcd, result_pcd)
     
-    result_mesh = f'results/{args.data_type}_{args.scene_type}_{args.recon_method}.obj'
-    me = MeshReconstruction()
-    if (args.recon_method == "alpha"):
-        mesh = me.alpha_shapes(pcd, mesh_config["alpha"])
-    elif (args.recon_method == "ball_pivot"):
-        mesh = me.ball_pivot(pcd, mesh_config["radii"])
-    else:
-        mesh = me.poisson(pcd, mesh_config["depth"])
+    # result_mesh = f'results/{args.data_type}_{args.scene_type}_{args.recon_method}.obj'
+    # me = MeshReconstruction()
+    # if (args.recon_method == "alpha"):
+    #     mesh = me.alpha_shapes(pcd, mesh_config["alpha"])
+    # elif (args.recon_method == "ball_pivot"):
+    #     mesh = me.ball_pivot(pcd, mesh_config["radii"])
+    # else:
+    #     mesh = me.poisson(pcd, mesh_config["depth"])
     
-    me.visualize_mesh(mesh)
-    me.write_mesh(mesh, result_mesh)
+    # me.visualize_mesh(mesh)
+    # me.write_mesh(mesh, result_mesh)
 
