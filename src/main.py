@@ -51,15 +51,15 @@ if __name__ == "__main__":
         print(pcd)
         c.write_pointcloud(pcd, result_pcd)
     
-    # result_mesh = f'results/{args.data_type}_{args.scene_type}_{args.recon_method}.obj'
-    # me = MeshReconstruction()
-    # if (args.recon_method == "alpha"):
-    #     mesh = me.alpha_shapes(pcd, mesh_config["alpha"])
-    # elif (args.recon_method == "ball_pivot"):
-    #     mesh = me.ball_pivot(pcd, mesh_config["radii"])
-    # else:
-    #     mesh = me.poisson(pcd, mesh_config["depth"])
+    result_mesh = f'results/{args.data_type}_{args.scene_type}_{args.recon_method}.obj'
+    me = MeshReconstruction()
+    if (args.recon_method == "alpha"):
+        mesh = me.alpha_shapes(pcd, mesh_config["alpha"])
+    elif (args.recon_method == "ball_pivot"):
+        mesh = me.ball_pivot(pcd, mesh_config["radii"])
+    else:
+        mesh = me.poisson(pcd, mesh_config["depth"])
     
-    # me.visualize_mesh(mesh)
-    # me.write_mesh(mesh, result_mesh)
+    me.visualize_mesh(mesh)
+    me.write_mesh(mesh, result_mesh)
 
